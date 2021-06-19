@@ -6,7 +6,7 @@ import static java.util.Arrays.asList;
 import static org.junit.Assert.assertEquals;
 
 
-public class BoardTest1 {
+public class BoardTest {
     private final static Board board = new SquareBoard(2);
 
     public static void main(String[] args) {
