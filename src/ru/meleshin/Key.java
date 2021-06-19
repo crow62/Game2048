@@ -1,4 +1,4 @@
-package ru.melehin;
+package ru.meleshin;
 
 import java.util.Objects;
 

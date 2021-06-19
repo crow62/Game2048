@@ -1,8 +1,7 @@
-package ru.melehin;
+package ru.meleshin;
 
 import java.util.ArrayList;
 import java.util.Comparator;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -57,11 +56,7 @@ public class SquareBoard extends Board {
     @Override
     List<Key> getColumn(int j) {
         List<Key> columnKeys = new ArrayList<>();
-        for (Key key : board.keySet().stream().sorted((o1, o2) -> {
-            if (o1.getI() > o2.getI()) return 1;
-            else if (o1.getI() < o2.getI()) return -1;
-            else return 0;
-        }).collect(Collectors.toList())) {
+        for (Key key : board.keySet().stream().sorted(Comparator.comparingInt(Key::getI)).collect(Collectors.toList())) {
             if (key.getJ() == j) {
                 columnKeys.add(key);
             }
@@ -72,11 +67,7 @@ public class SquareBoard extends Board {
     @Override
     List<Key> getRow(int i) {
         List<Key> columnKeys = new ArrayList<>();
-        for (Key key : board.keySet().stream().sorted((o1, o2) -> {
-            if (o1.getJ() > o2.getJ()) return 1;
-            else if (o1.getJ() < o2.getJ()) return -1;
-            else return 0;
-        }).collect(Collectors.toList())) {
+        for (Key key : board.keySet().stream().sorted(Comparator.comparingInt(Key::getJ)).collect(Collectors.toList())) {
             if (key.getI() == i) {
                 columnKeys.add(key);
             }

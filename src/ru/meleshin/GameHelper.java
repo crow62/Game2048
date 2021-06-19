@@ -1,13 +1,12 @@
-package ru.melehin;
+package ru.meleshin;
 
-import java.util.Collections;
+
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class GameHelper {
     List<Integer> moveAndMergeEqual(List<Integer> list) {
         //сортировка с перемещением нуллов вправо
-        Collections.sort(list, (o1, o2) -> {
+        list.sort((o1, o2) -> {
             if (o2 == null) return -1;
             else if (o1 != null && o1 < o2) return -1;
             else return 0;
@@ -25,7 +24,7 @@ public class GameHelper {
         }
 
         //результирующая сортировка
-        Collections.sort(list, (o1, o2) -> {
+        list.sort((o1, o2) -> {
             if (o2 == null) return -1;
             else return 0;
         });

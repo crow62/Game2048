@@ -1,4 +1,4 @@
-package ru.melehin;
+package ru.meleshin;
 
 public interface Game {
     void init();
