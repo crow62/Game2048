@@ -2,6 +2,7 @@ package ru.meleshin;
 
 import java.util.ArrayList;
 import java.util.Comparator;
+import java.util.Iterator;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -13,12 +14,11 @@ public class SquareBoard extends Board {
 
     @Override
     void fillBoard(List<Integer> list) {
-        int count = 0;
+        Iterator<Integer> iterator = list.iterator();
         for (int i = 0; i < width; i++) {
             for (int j = 0; j < height; j++) {
-                board.put(new Key(i, j), list.get(count + i + j));
+                if (iterator.hasNext()) board.put(new Key(i, j), iterator.next());
             }
-            count = count + width - 1;
         }
     }
 
