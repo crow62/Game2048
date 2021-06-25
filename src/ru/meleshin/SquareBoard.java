@@ -6,15 +6,15 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class SquareBoard extends Board {
+public class SquareBoard<V> extends Board<Key, V> {
 
     public SquareBoard(int size) {
         super(size, size);
     }
 
     @Override
-    void fillBoard(List<Integer> list) {
-        Iterator<Integer> iterator = list.iterator();
+    public void fillBoard(List<V> list) {
+        Iterator<V> iterator = list.iterator();
         for (int i = 0; i < width; i++) {
             for (int j = 0; j < height; j++) {
                 if (iterator.hasNext()) board.put(new Key(i, j), iterator.next());
@@ -23,7 +23,7 @@ public class SquareBoard extends Board {
     }
 
     @Override
-    List<Key> availableSpace() {
+    public List<Key> availableSpace() {
         List<Key> keysNullValues = new ArrayList<>();
         for (Key key : board.keySet()) {
             if (board.get(key) == null) {
@@ -34,12 +34,12 @@ public class SquareBoard extends Board {
     }
 
     @Override
-    void addItem(Key key, Integer value) {
+    public void addItem(Key key, V value) {
         board.put(key, value);
     }
 
     @Override
-    Key getKey(int i, int j) {
+    public Key getKey(int i, int j) {
         for (Key key : board.keySet()) {
             if (key.getI() == i && key.getJ() == j) {
                 return key;
@@ -49,12 +49,12 @@ public class SquareBoard extends Board {
     }
 
     @Override
-    Integer getValue(Key key) {
+    public V getValue(Key key) {
         return board.get(key);
     }
 
     @Override
-    List<Key> getColumn(int j) {
+    public List<Key> getColumn(int j) {
         List<Key> columnKeys = new ArrayList<>();
         for (Key key : board.keySet().stream().sorted(Comparator.comparingInt(Key::getI)).collect(Collectors.toList())) {
             if (key.getJ() == j) {
@@ -65,7 +65,7 @@ public class SquareBoard extends Board {
     }
 
     @Override
-    List<Key> getRow(int i) {
+    public List<Key> getRow(int i) {
         List<Key> columnKeys = new ArrayList<>();
         for (Key key : board.keySet().stream().sorted(Comparator.comparingInt(Key::getJ)).collect(Collectors.toList())) {
             if (key.getI() == i) {
@@ -76,18 +76,30 @@ public class SquareBoard extends Board {
     }
 
     @Override
-    boolean hasValue(Integer value) {
-        for (Integer i : board.values()) {
-            if (i == value) {
-                return true;
+    public boolean hasValue(V value) {
+
+        if (value == null) {
+            for (V valueBoard : board.values()) {
+                if (valueBoard == null) {
+                    return true;
+                }
+            }
+            return false;
+        } else {
+            for (V valueBoard : board.values()) {
+                if (valueBoard != null) {
+                    if (valueBoard.equals(value)) {
+                        return true;
+                    }
+                }
             }
         }
         return false;
     }
 
     @Override
-    List<Integer> getValues(List<Key> keys) {
-        List<Integer> valuesRow = new ArrayList<>();
+    public List<V> getValues(List<Key> keys) {
+        List<V> valuesRow = new ArrayList<>();
         for (Key key : keys) {
             valuesRow.add(board.get(key));
         }
