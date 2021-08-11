@@ -14,12 +14,16 @@ public class SquareBoard<V> extends Board<Key, V> {
 
     @Override
     public void fillBoard(List<V> list) {
-        Iterator<V> iterator = list.iterator();
+        if (list.size() > width * height) {
+            throw new RuntimeException("init error");
+        }
+            Iterator<V> iterator = list.iterator();
         for (int i = 0; i < width; i++) {
             for (int j = 0; j < height; j++) {
                 if (iterator.hasNext()) board.put(new Key(i, j), iterator.next());
             }
         }
+
     }
 
     @Override
@@ -77,24 +81,7 @@ public class SquareBoard<V> extends Board<Key, V> {
 
     @Override
     public boolean hasValue(V value) {
-
-        if (value == null) {
-            for (V valueBoard : board.values()) {
-                if (valueBoard == null) {
-                    return true;
-                }
-            }
-            return false;
-        } else {
-            for (V valueBoard : board.values()) {
-                if (valueBoard != null) {
-                    if (valueBoard.equals(value)) {
-                        return true;
-                    }
-                }
-            }
-        }
-        return false;
+        return board.containsValue(value);
     }
 
     @Override

@@ -97,14 +97,16 @@ public class Game2048 implements Game {
         }
 
         addItem();
-        if (board.availableSpace().isEmpty()) return false;
-
-        return true;
+        return !board.availableSpace().isEmpty();
     }
 
     @Override
     public void addItem() {
-        if (board.availableSpace().isEmpty()) return;
+        if (board.availableSpace().isEmpty()) try {
+            throw new NotEnoughSpace("Not enough space");
+        } catch (NotEnoughSpace notEnoughSpace) {
+            notEnoughSpace.printStackTrace();
+        }
 
         int[] twoOrFour = {2, 4};
         int randomIndexTwoOrFour = random.nextInt(twoOrFour.length);
