@@ -44,5 +44,6 @@ class HelperTest {
         assertEquals(helper.moveAndMergeEqual(asList(null, null, null, null)), asList(null, null, null, null));
         assertEquals(helper.moveAndMergeEqual(asList(null, null, null, 2)), asList(2, null, null, null));
         assertEquals(helper.moveAndMergeEqual(asList(null, null, 2, 2)), asList(4, null, null, null));
+
     }
 }

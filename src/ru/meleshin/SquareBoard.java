@@ -17,7 +17,7 @@ public class SquareBoard<V> extends Board<Key, V> {
         if (list.size() > width * height) {
             throw new RuntimeException("init error");
         }
-            Iterator<V> iterator = list.iterator();
+        Iterator<V> iterator = list.iterator();
         for (int i = 0; i < width; i++) {
             for (int j = 0; j < height; j++) {
                 if (iterator.hasNext()) board.put(new Key(i, j), iterator.next());
@@ -86,10 +86,11 @@ public class SquareBoard<V> extends Board<Key, V> {
 
     @Override
     public List<V> getValues(List<Key> keys) {
-        List<V> valuesRow = new ArrayList<>();
+        List<V> listValues = new ArrayList<>();
         for (Key key : keys) {
-            valuesRow.add(board.get(key));
+            listValues.add(board.get(key));
         }
-        return valuesRow;
+        return listValues;
+
     }
 }

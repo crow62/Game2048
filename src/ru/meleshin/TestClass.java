@@ -12,5 +12,10 @@ public class TestClass {
         System.out.println(game2048.canMove());
 
 
+        List<Integer> list = Arrays.asList(1,2,3);
+        Collections.reverse(list);
+        System.out.println(list);
+
+
     }
 }
