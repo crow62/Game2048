@@ -6,9 +6,9 @@ import static java.util.Arrays.asList;
 
 public class Game2048 implements Game {
 
-    public static final int GAME_SIZE = 4;
+    public static int GAME_SIZE = 4;
     //private final Board<Key, Integer> board;
-    private final Board<Key, Integer> board = new SquareBoard<>(GAME_SIZE);
+    private Board<Key, Integer> board = new SquareBoard<>(GAME_SIZE);
 
     GameHelper helper = new GameHelper();
     Random random = new Random();
@@ -46,7 +46,7 @@ public class Game2048 implements Game {
     @Override
     public boolean move(Direction direction) {
         boolean factMoveLine;
-        boolean factMove =false;
+        boolean factMove = false;
         for (int i = 0; i < GAME_SIZE; i++) {
             switch (direction) {
                 case UP:
@@ -67,7 +67,7 @@ public class Game2048 implements Game {
         }
         if (factMove) addItem();
 
-            return canMove();
+        return canMove();
 
     }
 
@@ -94,14 +94,10 @@ public class Game2048 implements Game {
             } catch (NotEnoughSpace notEnoughSpace) {
                 notEnoughSpace.printStackTrace();
             }
-
-        int[] twoOrFour = {2, 4};
-        int randomIndexTwoOrFour = random.nextInt(twoOrFour.length);
-
         List<Key> keysNullValues = board.availableSpace();
         int randomIndexKeysNullValues = random.nextInt(board.availableSpace().size());
 
-        board.addItem(keysNullValues.get(randomIndexKeysNullValues), twoOrFour[randomIndexTwoOrFour]);
+        board.addItem(keysNullValues.get(randomIndexKeysNullValues), random.nextInt(10) == 1 ? 4 : 2);
     }
 
     @Override
