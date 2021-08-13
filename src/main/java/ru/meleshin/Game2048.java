@@ -7,22 +7,21 @@ import static java.util.Arrays.asList;
 public class Game2048 implements Game {
 
     public static int GAME_SIZE = 4;
-    //private final Board<Key, Integer> board;
+
     private Board<Key, Integer> board = new SquareBoard<>(GAME_SIZE);
 
     GameHelper helper = new GameHelper();
     Random random = new Random();
 
-//    public Game2048(Board<Key, Integer> board) {
-//        this.board = board;
-//    }
 
     @Override
     public void init() {
         board.fillBoard(asList(null, null, null, null, null, null, null, null,
                 null, null, null, null, null, null, null, null));
-        addItem();
-        addItem();
+        if (board.availableSpace().size() >= 2) {
+            addItem();
+            addItem();
+        }
     }
 
     //проверяем на наличие равных соседей в строках и столбцах
@@ -88,12 +87,13 @@ public class Game2048 implements Game {
 
     @Override
     public void addItem() {
-        if (board.availableSpace().isEmpty())
+        if (board.availableSpace().isEmpty()) {
             try {
                 throw new NotEnoughSpace("Not enough space");
             } catch (NotEnoughSpace notEnoughSpace) {
-                notEnoughSpace.printStackTrace();
+                System.out.println(notEnoughSpace.getMessage());
             }
+        }
         List<Key> keysNullValues = board.availableSpace();
         int randomIndexKeysNullValues = random.nextInt(board.availableSpace().size());
 
@@ -101,7 +101,7 @@ public class Game2048 implements Game {
     }
 
     @Override
-    public Board getGameBoard() {
+    public Board<Key, Integer> getGameBoard() {
         return board;
     }
 

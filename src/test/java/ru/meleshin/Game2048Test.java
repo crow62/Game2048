@@ -8,9 +8,9 @@ import org.junit.jupiter.params.provider.MethodSource;
 import org.mockito.*;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.util.*;
-import java.util.stream.Collectors;
-import java.util.stream.IntStream;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
@@ -34,7 +34,6 @@ class Game2048Test {
     @Test
     void initShouldFillBoardNullValues() {
         doNothing().when(board).fillBoard(anyList());
-        when(board.availableSpace()).thenReturn(Arrays.asList(new Key(1, 1)));
         game2048.init();
         verify(board).fillBoard(captor.capture());
         assertEquals(Arrays.asList(null, null, null, null, null, null, null, null,
@@ -51,24 +50,14 @@ class Game2048Test {
     @Test
     void canMoveShouldBeFalse() {
         Random random = new Random();
-        List<Integer> list = Arrays.asList(random.nextInt(100), random.nextInt(100),
-                random.nextInt(100), random.nextInt(100));
+        List<Integer> list = Arrays.asList(random.nextInt(1000), random.nextInt(1000),
+                random.nextInt(1000), random.nextInt(1000));
 
-        when(board.availableSpace()).thenReturn(Arrays.asList(new Key(1, 1)));
-        when(board.getValues(board.getRow(0))).thenReturn(list);
-        when(board.getValues(board.getColumn(0))).thenReturn(list);
-        when(board.getValues(board.getRow(1))).thenReturn(list);
-        when(board.getValues(board.getColumn(1))).thenReturn(list);
-        when(board.getValues(board.getRow(2))).thenReturn(list);
-        when(board.getValues(board.getColumn(2))).thenReturn(list);
-        when(board.getValues(board.getRow(3))).thenReturn(list);
-        when(board.getValues(board.getColumn(3))).thenReturn(list);
+        when(board.getValues(anyList())).thenReturn(list);
 
         boolean move = game2048.canMove();
-        assertTrue(move);
-        verify(board,times(4)).getValues(board.getRow(anyInt()));
-        verify(board,times(4)).getValues(board.getColumn(anyInt()));
-
+        assertFalse(move);
+        verify(board, times(8)).getValues(anyList());
     }
 
 
@@ -76,8 +65,40 @@ class Game2048Test {
     void move() {
     }
 
+
+    @Test
+    void moveLineShouldBeTrue() throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
+
+        when(board.getValues(anyList())).thenReturn(Arrays.asList(4,null,2,2));
+
+        //получаем доступ к приватному методу @moveLine
+        Method moveLineMethod = game2048.getClass().getDeclaredMethod("moveLine", List.class, Direction.class);
+        moveLineMethod.setAccessible(true);
+
+        boolean returnValueFromMoveLine = (boolean) moveLineMethod.invoke(game2048, anyList(), Direction.UP);
+
+        assertTrue(returnValueFromMoveLine);
+    }
+
+    @Test
+    void moveLineShouldBeFalse() throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
+
+        when(board.getValues(anyList())).thenReturn(Arrays.asList(2,null,2,null));
+        doReturn(Arrays.asList(2,null,2,null)).when(gameHelper).moveAndMergeEqual(anyList());
+
+        //получаем доступ к приватному методу @moveLine
+        Method moveLineMethod = game2048.getClass().getDeclaredMethod("moveLine", List.class, Direction.class);
+        moveLineMethod.setAccessible(true);
+
+        boolean returnValueFromMoveLine = (boolean) moveLineMethod.invoke(game2048, anyList(), Direction.UP);
+
+        assertFalse(returnValueFromMoveLine);
+    }
+
     @Test
     void addItem() {
+        when(board.availableSpace()).thenReturn(Collections.emptyList());
+        assertThrows(IllegalArgumentException.class, () -> game2048.addItem());
     }
 
     @Test
