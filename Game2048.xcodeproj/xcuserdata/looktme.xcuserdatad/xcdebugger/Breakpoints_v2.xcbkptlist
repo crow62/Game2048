@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Bucket
+   uuid = "68CA831E-502C-410F-B242-9F0E41910C4B"
+   type = "1"
+   version = "2.0">
+   <Breakpoints>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "34C371CF-C013-44E1-8557-E7692F2F6312"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Game2048/model/Game.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "137"
+            endingLineNumber = "137"
+            landmarkName = "moveNilToEnd(arr:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "C47E5076-1703-4A24-A440-CCB7551BD1B3"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Game2048/model/Game.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "70"
+            endingLineNumber = "70"
+            landmarkName = "getAllFields()"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "C47E5076-1703-4A24-A440-CCB7551BD1B3 - c30781ec6da11517"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Game2048.Game.getAllFields() -&gt; Swift.Array&lt;Game2048.Field&gt;"
+                  moduleName = "Game2048"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/looktme/Desktop/Game2048/Game2048/model/Game.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "24"
+                  endingLineNumber = "24"
+                  offsetFromSymbolStart = "24">
+               </Location>
+               <Location
+                  uuid = "C47E5076-1703-4A24-A440-CCB7551BD1B3 - 48fc244417e995ab"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (Game2048.Position) -&gt; Swift.Bool in Game2048.Game.getAllFields() -&gt; Swift.Array&lt;Game2048.Field&gt;"
+                  moduleName = "Game2048"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/looktme/Desktop/Game2048/Game2048/model/Game.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "24"
+                  endingLineNumber = "24"
+                  offsetFromSymbolStart = "24">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+   </Breakpoints>
+</Bucket>
