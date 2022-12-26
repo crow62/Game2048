@@ -55,7 +55,6 @@ class BoardController: UIViewController {
         menuButton.titleLabel?.sizeToFit()
         leaderboardButton.layer.cornerRadius = 5
         leaderboardButton.setTitle("LEADERBOARD", for: .normal)
-        
     }
     
     
